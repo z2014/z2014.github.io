@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>z2014的博客</title>
+  <title>回调函数与Promise(中心第一次分享) | z2014的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一些自己在项目中的心得体会">
-<meta property="og:type" content="website">
-<meta property="og:title" content="z2014的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="1.异步编程js中异步编程主要指的是setTimout/setInterval、DOM事件机制、ajax，通过传入回调函数实现控制反转
+2.事件循环定义：提供了一种机制来处理程序中多个块的执行，且执行每块时调用javascript引擎通俗点就是：javascript引擎没有时间的概念，只是执行一个js代码片段的环境123456789101112131415setTimeout(function()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回调函数与Promise(中心第一次分享)">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/post2/index.html">
 <meta property="og:site_name" content="z2014的博客">
-<meta property="og:description" content="一些自己在项目中的心得体会">
+<meta property="og:description" content="1.异步编程js中异步编程主要指的是setTimout/setInterval、DOM事件机制、ajax，通过传入回调函数实现控制反转
+2.事件循环定义：提供了一种机制来处理程序中多个块的执行，且执行每块时调用javascript引擎通俗点就是：javascript引擎没有时间的概念，只是执行一个js代码片段的环境123456789101112131415setTimeout(function()">
+<meta property="og:updated_time" content="2016-11-12T14:02:40.021Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="z2014的博客">
-<meta name="twitter:description" content="一些自己在项目中的心得体会">
+<meta name="twitter:title" content="回调函数与Promise(中心第一次分享)">
+<meta name="twitter:description" content="1.异步编程js中异步编程主要指的是setTimout/setInterval、DOM事件机制、ajax，通过传入回调函数实现控制反转
+2.事件循环定义：提供了一种机制来处理程序中多个块的执行，且执行每块时调用javascript引擎通俗点就是：javascript引擎没有时间的概念，只是执行一个js代码片段的环境123456789101112131415setTimeout(function()">
   
   
     <link rel="icon" href="/favicon.png">
@@ -109,9 +113,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-post2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-post2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/18/post2/" class="article-date">
   <time datetime="2016-11-18T14:26:49.830Z" itemprop="datePublished">2016-11-18</time>
@@ -124,8 +126,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/18/post2/">回调函数与Promise(中心第一次分享)</a>
+    <h1 class="article-title" itemprop="name">
+      回调函数与Promise(中心第一次分享)
     </h1>
   
 
@@ -162,52 +164,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-post1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/18/post1/" class="article-date">
-  <time datetime="2016-11-18T14:26:49.810Z" itemprop="datePublished">2016-11-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/18/post1/">刮刮乐效果遇到的一些问题</a>
-    </h1>
+    <a href="/2016/11/18/post1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">刮刮乐效果遇到的一些问题</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-context-save-和context-restore"><a href="#1-context-save-和context-restore" class="headerlink" title="1. $ context.save()和context.restore()"></a>1. $ context.save()和context.restore()</h3><p>一开始写onmousemove事件里面没用到上面两个方法，但是鼠标划进去后只绘制第一次鼠标位置的图像，<br>之后在canvas上移动就不再更新canvas，后来看到这两个用法，知道他们是成对出现的，canvas状态是<br>以堆得方式保存，save()是用来保存canvas状态的，store()是用来恢复上一个canvas状态的，那么<br>如果我在鼠标移入后没有restore，那么canvas画布就会更新成图片上出现的那一个圆的图像，因此在每一次<br>鼠标移入事件的开始都要save一下，在绘画完成后在restore到上一个canvas的状态，这样canvas就能一直<br>保持原来的大小。</p>
-<h3 id="2-canvas在style和行内样式设置宽高效果不同"><a href="#2-canvas在style和行内样式设置宽高效果不同" class="headerlink" title="2.canvas在style和行内样式设置宽高效果不同"></a>2.canvas在style和行内样式设置宽高效果不同</h3><p>虽然图片能够持续绘制，但是有一些边边角角还是绘制不出来，一开始以为drawImage()后面没有设置<br>宽和高的参数，改了以后还是没有效果，而且图片会非常模糊，后来把style里面的宽高设置移动到<br>canvas标签里面，图片正常显示了，因为canvas默认的宽高是300px，150px，在css中设置宽高，实际上是<br>把原来的canvas进行了拉伸，所以图片变得模糊了。</p>
-<p>最后把img.onload用promise替换了一下，感觉就是逻辑稍微通顺了点，这个在项目中再慢慢体会</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="civnzezdg0000448nc5sdql02" class="article-share-link">Share</a>
-      
-
-      
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
       </div>
