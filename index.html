@@ -89,7 +89,7 @@
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -110,6 +110,43 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-post3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/20/post3/" class="article-date">
+  <time datetime="2016-11-20T01:31:14.203Z" itemprop="datePublished">2016-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-移动端杂谈"><a href="#title-移动端杂谈" class="headerlink" title="title:移动端杂谈"></a>title:移动端杂谈</h2><h3 id="小小的记录一下最近做移动页面开发的收获"><a href="#小小的记录一下最近做移动页面开发的收获" class="headerlink" title="小小的记录一下最近做移动页面开发的收获"></a>小小的记录一下最近做移动页面开发的收获</h3><hr>
+<h3 id="1-像素并非像素"><a href="#1-像素并非像素" class="headerlink" title="1.像素并非像素"></a>1.像素并非像素</h3><h5 id="一个是设备的物理尺寸-也就是硬件像素-，一个是css像素-css中的像素是一个抽象的单位"><a href="#一个是设备的物理尺寸-也就是硬件像素-，一个是css像素-css中的像素是一个抽象的单位" class="headerlink" title="一个是设备的物理尺寸(也就是硬件像素)，一个是css像素(css中的像素是一个抽象的单位)"></a>一个是设备的物理尺寸(也就是硬件像素)，一个是css像素(css中的像素是一个抽象的单位)</h5><p>在不同的设备或不同的环境中，css中的1px所代表的设备物理像素是不同的。</p>
+<h5 id="window-devicePixelRatio-屏幕物理像素-独立像素"><a href="#window-devicePixelRatio-屏幕物理像素-独立像素" class="headerlink" title="window.devicePixelRatio = 屏幕物理像素/独立像素"></a>window.devicePixelRatio = 屏幕物理像素/独立像素</h5><p>devicePixelRatio就是手机的物理像素与实际使用像素的缩放比。<br><br>像在iphone4s上，屏幕物理像素640px,独立像素是320px，因此devicePixelRatio 的值为2</p>
+<h5 id="ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸"><a href="#ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸" class="headerlink" title="ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸"></a>ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸</h5><p>默认比例依赖于显示密度。在密度低于200 dpi的显示设备上，比例为1.0。<br><br>在密度介于200及300 dpi之间的显示设备上，比例为1.5。<br><br>因此在retina的显示屏上，<br>对于具有300 dpi以上密度的显示设备，比例为密度/150dpi向下取整的结果。<br><br>(再有在视口比例为1时才会应用默认比例。否则，CSS像素与设备像素之间的关系依赖于当前的缩放等级。)<br><br>1）在devicePixelRatio&lt;=2时，图片统一使用750设计稿的切图<br><br>2）在devicePixelRatio&gt;=2时，图片统一使用750*1.5=1125，也就是所谓@3x设计稿的切图。<br></p>
+<h5 id="CSS-Reference-Pixel"><a href="#CSS-Reference-Pixel" class="headerlink" title="CSS Reference Pixel"></a>CSS Reference Pixel</h5><p>它为了保证CSS像素在不同设备和不同距离上观测到的大小保持一致保持连贯性。(感觉很难把握)</p>
+<h3 id="2-media媒体查询"><a href="#2-media媒体查询" class="headerlink" title="2.@media媒体查询"></a>2.@media媒体查询</h3><p>找到了一个一般的用rem布局的方法<br>首先根据psd的设计稿宽度设置一个基值，然后js获取到当前窗口的宽度值，<br><br>然后把这个设计稿宽度除以100栅格化一下，获得一份的宽度数，<br><br>之后再用真实窗口的宽度除以这个一份的宽度，拿到就是需要给html设置的fontsize的px值。<br><br>最后设计图上相对应的的宽度除以100就得到了各种宽度的rem值.</p>
+<h3 id="3-viewport"><a href="#3-viewport" class="headerlink" title="3.viewport"></a>3.viewport</h3><p>html元素宽度是占据viewport的100%，而在桌面浏览器中，viewport与浏览器窗口大小刚好相等。<br><br>但在移动端中，默认是以980px渲染网页的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320, initial-scale=1.5&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>因此现在可以自己设定他渲染的像素，也可以获取该设备的宽度width=device-width<br></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="civqp7kea0000r08nxijxjjuj" class="article-share-link">공유</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-post2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -155,7 +192,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="civol3hvi0000xw8np3k3cned" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="civqp7ksl0001r08n6lylmbbv" class="article-share-link">공유</a>
       
 
       
@@ -196,7 +233,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="civol3hwa0001xw8nk8qa4bl5" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="civqp7ksp0002r08nt7gi342u" class="article-share-link">공유</a>
       
 
       
