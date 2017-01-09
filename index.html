@@ -111,6 +111,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-post4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/09/post4/" class="article-date">
+  <time datetime="2017-01-09T02:12:31.991Z" itemprop="datePublished">2017-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/09/post4/">用react搭起的逼乎的应用总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了，<br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。<br>传送门<a href="http://112.74.56.239:8080/topic/bi-hu/index.html" target="_blank" rel="external">逼乎</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="cixpix2wl0003uk8nvrkb896f" class="article-share-link">Share</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-post3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/20/post3/" class="article-date">
@@ -147,7 +186,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="cixpik5s00001ak8nyfe4cshq" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="cixpix2wj0002uk8n5hwhcv21" class="article-share-link">Share</a>
       
 
       
@@ -202,7 +241,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="cixpik5s40002ak8nm338errg" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="cixpix2wc0001uk8nsom3zkeh" class="article-share-link">Share</a>
       
 
       
@@ -243,7 +282,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="cixpik5rq0000ak8nf3hx1m5l" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="cixpix2w30000uk8nxpbnxp68" class="article-share-link">Share</a>
       
 
       

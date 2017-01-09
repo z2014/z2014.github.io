@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>刮刮乐效果遇到的一些问题 | z2014的博客</title>
+  <title>用react搭起的逼乎的应用总结 | z2014的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. $ context.save()和context.restore()一开始写onmousemove事件里面没用到上面两个方法，但是鼠标划进去后只绘制第一次鼠标位置的图像，之后在canvas上移动就不再更新canvas，后来看到这两个用法，知道他们是成对出现的，canvas状态是以堆得方式保存，save()是用来保存canvas状态的，store()是用来恢复上一个canvas状态的，那么如果">
+  <meta name="description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刮刮乐效果遇到的一些问题">
-<meta property="og:url" content="http://yoursite.com/2016/11/18/post1/index.html">
+<meta property="og:title" content="用react搭起的逼乎的应用总结">
+<meta property="og:url" content="http://yoursite.com/2017/01/09/post4/index.html">
 <meta property="og:site_name" content="z2014的博客">
-<meta property="og:description" content="1. $ context.save()和context.restore()一开始写onmousemove事件里面没用到上面两个方法，但是鼠标划进去后只绘制第一次鼠标位置的图像，之后在canvas上移动就不再更新canvas，后来看到这两个用法，知道他们是成对出现的，canvas状态是以堆得方式保存，save()是用来保存canvas状态的，store()是用来恢复上一个canvas状态的，那么如果">
-<meta property="og:updated_time" content="2016-11-12T13:52:07.361Z">
+<meta property="og:description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
+<meta property="og:updated_time" content="2017-01-09T03:22:53.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刮刮乐效果遇到的一些问题">
-<meta name="twitter:description" content="1. $ context.save()和context.restore()一开始写onmousemove事件里面没用到上面两个方法，但是鼠标划进去后只绘制第一次鼠标位置的图像，之后在canvas上移动就不再更新canvas，后来看到这两个用法，知道他们是成对出现的，canvas状态是以堆得方式保存，save()是用来保存canvas状态的，store()是用来恢复上一个canvas状态的，那么如果">
+<meta name="twitter:title" content="用react搭起的逼乎的应用总结">
+<meta name="twitter:description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
   
   
     <link rel="icon" href="logo.png">
@@ -110,10 +110,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-post1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-post4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/18/post1/" class="article-date">
-  <time datetime="2016-11-18T14:26:49.810Z" itemprop="datePublished">2016-11-18</time>
+    <a href="/2017/01/09/post4/" class="article-date">
+  <time datetime="2017-01-09T02:12:31.991Z" itemprop="datePublished">2017-01-09</time>
 </a>
     
   </div>
@@ -124,7 +124,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      刮刮乐效果遇到的一些问题
+      用react搭起的逼乎的应用总结
     </h1>
   
 
@@ -132,15 +132,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-context-save-和context-restore"><a href="#1-context-save-和context-restore" class="headerlink" title="1. $ context.save()和context.restore()"></a>1. $ context.save()和context.restore()</h3><p>一开始写onmousemove事件里面没用到上面两个方法，但是鼠标划进去后只绘制第一次鼠标位置的图像，<br>之后在canvas上移动就不再更新canvas，后来看到这两个用法，知道他们是成对出现的，canvas状态是<br>以堆得方式保存，save()是用来保存canvas状态的，store()是用来恢复上一个canvas状态的，那么<br>如果我在鼠标移入后没有restore，那么canvas画布就会更新成图片上出现的那一个圆的图像，因此在每一次<br>鼠标移入事件的开始都要save一下，在绘画完成后在restore到上一个canvas的状态，这样canvas就能一直<br>保持原来的大小。</p>
-<h3 id="2-canvas在style和行内样式设置宽高效果不同"><a href="#2-canvas在style和行内样式设置宽高效果不同" class="headerlink" title="2.canvas在style和行内样式设置宽高效果不同"></a>2.canvas在style和行内样式设置宽高效果不同</h3><p>虽然图片能够持续绘制，但是有一些边边角角还是绘制不出来，一开始以为drawImage()后面没有设置<br>宽和高的参数，改了以后还是没有效果，而且图片会非常模糊，后来把style里面的宽高设置移动到<br>canvas标签里面，图片正常显示了，因为canvas默认的宽高是300px，150px，在css中设置宽高，实际上是<br>把原来的canvas进行了拉伸，所以图片变得模糊了。</p>
-<p>最后把img.onload用promise替换了一下，感觉就是逻辑稍微通顺了点，这个在项目中再慢慢体会</p>
+        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了，<br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。<br>传送门<a href="http://112.74.56.239:8080/topic/bi-hu/index.html" target="_blank" rel="external">逼乎</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="cixpix2w30000uk8nxpbnxp68" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="cixpix2wl0003uk8nvrkb896f" class="article-share-link">Share</a>
       
 
       
@@ -150,15 +148,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/11/18/post2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          回调函数与Promise(中心第一次分享)
-        
-      </div>
-    </a>
   
+    <a href="/2016/11/20/post3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">移动端杂谈</div>
+    </a>
   
 </nav>
 
