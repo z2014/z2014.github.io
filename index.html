@@ -89,7 +89,7 @@
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -110,6 +110,73 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/31/webpack/" class="article-date">
+  <time datetime="2017-01-31T15:03:18.763Z" itemprop="datePublished">2017-01-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/31/webpack/">webpack</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前一阵子时间折腾了好久的webpack，今天就来记录一下之前的收获"><a href="#前一阵子时间折腾了好久的webpack，今天就来记录一下之前的收获" class="headerlink" title="前一阵子时间折腾了好久的webpack，今天就来记录一下之前的收获"></a>前一阵子时间折腾了好久的webpack，今天就来记录一下之前的收获</h4><h3 id="webpack是什么"><a href="#webpack是什么" class="headerlink" title="webpack是什么"></a>webpack是什么</h3><p>webpack是一款模块加载器兼打包工具，能把各种资源(eg：js，css，img等)都作为模块来处理和使用</p>
+<h3 id="配置webpack"><a href="#配置webpack" class="headerlink" title="配置webpack"></a>配置webpack</h3><p>每个项目下都要创建一个webpack.config.js文件，他是一个配置项，用来告诉webpack该做哪些事</p>
+<h3 id="安装依赖有如下两种方式"><a href="#安装依赖有如下两种方式" class="headerlink" title="安装依赖有如下两种方式"></a>安装依赖有如下两种方式</h3><ul>
+<li>npm install name –save ，这是发布之后还要依赖的东西</li>
+<li>npm install name –save-dev，是开发时候依赖的东西</li>
+</ul>
+<p>比如，你写 ES6 代码，如果你想编译成 ES5 发布那么 babel 就是devDependencies。<br>如果你用了 jQuery，由于发布之后还是依赖jQuery，所以是dependencies。</p>
+<h3 id="这是webpack打包react的一个简单配置"><a href="#这是webpack打包react的一个简单配置" class="headerlink" title="这是webpack打包react的一个简单配置"></a>这是webpack打包react的一个简单配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">    entry: &#123;	</div><div class="line">        page1 : &apos;./index.js&apos;,</div><div class="line">        page2 : [&apos;./entry1&apos;,&apos;./entry2&apos;]</div><div class="line">    &#125;,</div><div class="line">    output: &#123;	</div><div class="line">        path: &apos;dist/page&apos;,</div><div class="line">       	filename: &apos;[name].js&apos;</div><div class="line">    &#125;,</div><div class="line">    resolve: &#123;</div><div class="line">        extensions: [&apos;&apos;, &apos;.js&apos;, &apos;.jsx&apos;,&apos;style&apos;]</div><div class="line">    &#125;,</div><div class="line">    module: &#123;	</div><div class="line">	    loaders: [&#123;</div><div class="line">            test: /\.js$/,</div><div class="line">            exclude: /node_modules/,</div><div class="line">            loader: &apos;babel&apos;,</div><div class="line">            query: &#123;</div><div class="line">                presets: [&apos;es2015&apos;, &apos;stage-3&apos;, &apos;react&apos;]</div><div class="line">            &#125;</div><div class="line">        &#125;,&#123;</div><div class="line">            test:/\.css$/,</div><div class="line">            exclude:/node_modules/,</div><div class="line">            loaders:[&apos;style&apos;,&apos;css&apos;]</div><div class="line">        &#125;]</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这是一个基本的webpack配置文件,</p>
+<ul>
+<li>entry是项目的入口文件，文件支持数组形式，事例中配置是在多页面站点中</li>
+<li>output是对应输出配置，指输出什么名字的文件存放在什么位置，事例中会生成page1.js和page2.js</li>
+<li>module模块他会告知webpack每一种文件需要什么加载器来处理</li>
+</ul>
+<p>加载 CSS 需要 css-loader 和 style-loader，他们做两件不同的事情，css-loader会遍历 CSS 文件，然后找到 url() 表达式然后处理他们，style-loader 会把原来的 CSS 代码插入页面中的一个 style 标签中,在引入css的时候尽量让每个组件加载自己的css，并且让组件名和 CSS 中的 class 使用一个命名空间</p>
+<p>extensions：自动补全识别后缀，是一个数组。如果你想请求一个js文件但是在请求时不带扩展,那么就需要将’.js’添加到数组中。其他文件一样<br><code>import App from &#39;./App&#39;</code></p>
+<p>当在引入第三方像ReactJS这样的大型库，一般要将依赖分离出去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">entry: &#123;</div><div class="line">	vendors: [&apos;react&apos;]</div><div class="line">&#125;</div><div class="line">plugins: [</div><div class="line">    new webpack.optimize.CommonsChunkPlugin(&apos;vendors&apos;,&apos;vendors.js&apos;)</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>只要在index.html下引入这个vendors.js即可</p>
+<p>当你的项目目录名很繁琐的时候，在你想引入文件但是又想偷懒的时候,更改完如下配置，你只需要require(‘js/main.js’)即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var path = require(&apos;path&apos;);</div><div class="line">module.exports = &#123;</div><div class="line">	resolve: &#123;</div><div class="line">        alias:&#123;</div><div class="line">	        js:path.join(__dirname,&apos;./app/src/scripts&apos;)   </div><div class="line">	    &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>完成如上配置后，你只需要输入webpack，然后就会打包完成。但是这样当你每次修改文件都需要重新输入webpack会非常麻烦，这个时候就需要<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install webpack-dev-server --save-dev</div></pre></td></tr></table></figure></p>
+<p>安装完成后，在package.json里面进行如下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot;scripts&quot; &#123;</div><div class="line">    &quot;start&quot;: &quot;webpack-dev-server --inline --content-base . --history-api-fallback&quot;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你启动webpack-dev-server后，你在目标文件夹中是看不到编译后的文件的,实时编译后的文件都保存到了内存当中，webpack-dev-server默认会以当前目录为基本目录,除非你制定它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--content-base build/</div></pre></td></tr></table></figure>
+<p>下面是在你处理h5 router的时候，需要将它设置为true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--history-api-fallback</div></pre></td></tr></table></figure>
+<p>配置完成后，运行npm start，这样文件在修改之后就能自动刷新了</p>
+<p>基本用过的就这么多，还有很多东西的没用到，以后用过了再来补充</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/01/31/webpack/" data-id="ciywasyjn0001iw8n07ouyaue" class="article-share-link">Share</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-post5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -161,7 +228,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/21/post5/" data-id="ciy620a560004lo8nhfybmk8g" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/21/post5/" data-id="ciywasykm0005iw8nnjq2iq4w" class="article-share-link">Share</a>
       
 
       
@@ -200,7 +267,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="ciy620a540003lo8nijilw6ke" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="ciywasyki0004iw8nnbi9g87n" class="article-share-link">Share</a>
       
 
       
@@ -247,7 +314,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="ciy620a520002lo8n39d0yhoo" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="ciywasyju0003iw8nu876tswy" class="article-share-link">Share</a>
       
 
       
@@ -302,7 +369,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="ciy620a4r0000lo8nsoqjinhk" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="ciywasyj90000iw8ns6fhr6xp" class="article-share-link">Share</a>
       
 
       
@@ -343,7 +410,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="ciy620a4z0001lo8nkhuqjtyy" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="ciywasyjr0002iw8n2g252tml" class="article-share-link">Share</a>
       
 
       
