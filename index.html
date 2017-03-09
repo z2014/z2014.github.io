@@ -89,7 +89,7 @@
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -167,7 +167,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/31/webpack/" data-id="ciywasyjn0001iw8n07ouyaue" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2017/01/31/webpack/" data-id="cj02iyb0p0004os8nsoi1be6u" class="article-share-link">공유</a>
       
 
       
@@ -228,7 +228,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/21/post5/" data-id="ciywasykm0005iw8nnjq2iq4w" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2017/01/21/post5/" data-id="cj02iyb0j0003os8nxiq0uzca" class="article-share-link">공유</a>
       
 
       
@@ -261,13 +261,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了，<br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。<br>传送门<a href="http://112.74.56.239:8080/topic/bi-hu/index.html" target="_blank" rel="external">逼乎</a></p>
+        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了<br><br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，因为如果想在jxx表达式中显示html实体，可能会遇到二次转义的问题，还可以用Unicode字符来解决，这是要确保文件是UTF-8编码且网页也是UTF-8编码。还可以在数组里混合使用字符串和jsx元素。在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="ciywasyki0004iw8nnbi9g87n" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="cj02iyazy0001os8ngb4dxvs6" class="article-share-link">공유</a>
       
 
       
@@ -306,15 +306,23 @@
 <h5 id="ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸"><a href="#ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸" class="headerlink" title="ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸"></a>ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸</h5><p>默认比例依赖于显示密度。在密度低于200 dpi的显示设备上，比例为1.0。<br><br>在密度介于200及300 dpi之间的显示设备上，比例为1.5。<br><br>因此在retina的显示屏上，<br>对于具有300 dpi以上密度的显示设备，比例为密度/150dpi向下取整的结果。<br><br>(再有在视口比例为1时才会应用默认比例。否则，CSS像素与设备像素之间的关系依赖于当前的缩放等级。)<br></p>
 <h5 id="CSS-Reference-Pixel"><a href="#CSS-Reference-Pixel" class="headerlink" title="CSS Reference Pixel"></a>CSS Reference Pixel</h5><p>它为了保证CSS像素在不同设备和不同距离上观测到的大小保持一致保持连贯性。(感觉很难把握)</p>
 <h3 id="2-media媒体查询"><a href="#2-media媒体查询" class="headerlink" title="2.@media媒体查询"></a>2.@media媒体查询</h3><p>主要是用来适配各种机型，对于一些要求不高的的项目，可以用这种方式进行适配(只是配一些主要机型)，<br><br>但是缺点是适配的样式是范围型的，不够精确</p>
-<h3 id="3-viewport"><a href="#3-viewport" class="headerlink" title="3.viewport"></a>3.viewport</h3><p>html元素宽度是占据viewport的100%，而在桌面浏览器中，viewport与浏览器窗口大小刚好相等。<br><br>但在移动端中，默认是以980px渲染网页的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320, initial-scale=1.5&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>因此现在可以自己设定他渲染的像素，也可以获取该设备的宽度width=device-width<br><br><a href="http://www.infoq.com/cn/articles/development-of-the-mobile-web-deep-concept" target="_blank" rel="external">一篇比较详细的介绍移动端的文章</a></p>
-<h3 id="4-解决方案"><a href="#4-解决方案" class="headerlink" title="4.解决方案"></a>4.解决方案</h3><p>(1).当适配机型是Retina屏幕下时，用媒体查询的方式对图片的加载需要进行适配，可以准备两张图片<br><br>一张普通像素照片，一张高精度照片，这样就可以在Retina屏幕下加载高精密度像素的图片<br><br>(2).移动端页面适配最后参考了一下手淘的方式，开源能够直接用，而且能够适配所有机型，<br><br>引入手淘flexible.js后，不同写任何的meta标签，将设计稿宽度除以10，作为根元素字体大小，<br>之后量出其他元素宽度，转换为rem就可以了<br><br>最后用手淘的flexible.js方案写一个<a href="https://z2014.github.io/baidu-task/phone/index.html" target="_blank" rel="external">demo</a></p>
+<h3 id="3-viewport"><a href="#3-viewport" class="headerlink" title="3.viewport"></a>3.viewport</h3><p>html元素宽度是占据viewport的100%，而在桌面浏览器中，viewport与浏览器窗口大小刚好相等。<br><br>但在移动端中，默认是以980px渲染网页的</p>
+<h4 id="1-layout-viewport"><a href="#1-layout-viewport" class="headerlink" title="(1).layout viewport"></a>(1).layout viewport</h4><p>layout viewport的概念其实跟pc端的viewport是一样的，是作为html的”上层“元素。将宽继承给html。html内的各元素都是以layout viewport为基准进行布局的。但跟pc端不同的是，pc端的viewport的宽是由浏览器的窗口的宽决定的，用户可以手动拖动窗口改变宽的大小。但是移动端的不同平台的浏览器呈现不同的layout viewport</p>
+<h4 id="2-visual-viewport"><a href="#2-visual-viewport" class="headerlink" title="(2).visual viewport"></a>(2).visual viewport</h4><p>将visual viewport想象成覆盖手机屏幕的一个框，这个框带有类似pc端缩放的功能，而且这个框的度量单位也是css像素。这就意味着，在layout viewport不变的情况，我们能看到多少css像素的东西，取决于这个框的缩放程度。默认情况下。大多数移动端浏览器会将visual viewport这个框缩放到与layout viewport相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320, initial-scale=1.5&quot;&gt;</div></pre></td></tr></table></figure>
+<p>因此现在可以自己设定他渲染的像素，也可以获取该设备的宽度width=device-width<br></p>
+<ul>
+<li>document.innerWidth能取到浏览器窗口的宽(包含滚动条)</li>
+<li>document.documentElement.clientWidth(viewport的宽)</li>
+<li>默认「body」的宽度取自「HTML」，而「HTML」的宽度取自「viewport」，「viewport」的宽度正好等于「浏览器」窗口的宽度。<br><a href="http://www.infoq.com/cn/articles/development-of-the-mobile-web-deep-concept" target="_blank" rel="external">一篇比较详细的介绍移动端的文章</a></li>
+</ul>
+<h3 id="4-解决方案"><a href="#4-解决方案" class="headerlink" title="4.解决方案"></a>4.解决方案</h3><p>(1).当适配机型是Retina屏幕下时，用媒体查询的方式对图片的加载需要进行适配，可以准备两张图片<br><br>一张普通像素照片，一张高精度照片，这样就可以在Retina屏幕下加载高精密度像素的图片<br><br>(2).移动端页面适配最后参考了一下手淘的方式，开源能够直接用，而且能够适配所有机型，<br><br>引入手淘flexible.js后，不同写任何的meta标签，将设计稿宽度除以10，作为根元素字体大小，<br>之后量出其他元素宽度，转换为rem就可以了<br><br><a href="http://lvdada.org/2016/01/28/viewport-and-flexibleJs" target="_blank" rel="external">一篇flexible.js的原理分析</a><br><br>最后用手淘的flexible.js方案写一个<a href="https://z2014.github.io/baidu-task/phone/index.html" target="_blank" rel="external">demo</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="ciywasyju0003iw8nu876tswy" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="cj02iyb100005os8noa8lew7d" class="article-share-link">공유</a>
       
 
       
@@ -369,7 +377,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="ciywasyj90000iw8ns6fhr6xp" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="cj02iyb0b0002os8njw4r17c1" class="article-share-link">공유</a>
       
 
       
@@ -410,7 +418,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="ciywasyjr0002iw8n2g252tml" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="cj02iyayx0000os8nhs8k31ib" class="article-share-link">공유</a>
       
 
       

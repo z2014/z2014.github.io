@@ -15,7 +15,7 @@ window.devicePixelRatio = 屏幕物理像素/设备独立像素devicePixelRatio�
 <meta property="og:description" content="小小的记录一下最近做移动页面开发的收获
 1.像素并非像素一个是设备的物理尺寸(也就是硬件像素)，一个是css像素(css中的像素是一个抽象的单位)在不同的设备或不同的环境中，css中的1px所代表的设备物理像素是不同的。
 window.devicePixelRatio = 屏幕物理像素/设备独立像素devicePixelRatio就是手机的物理像素与实际使用像素的缩放比。像在iphone4s上，屏">
-<meta property="og:updated_time" content="2016-11-26T05:29:47.799Z">
+<meta property="og:updated_time" content="2017-03-09T14:59:15.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端杂谈">
 <meta name="twitter:description" content="小小的记录一下最近做移动页面开发的收获
@@ -96,7 +96,7 @@ window.devicePixelRatio = 屏幕物理像素/设备独立像素devicePixelRatio�
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -144,15 +144,23 @@ window.devicePixelRatio = 屏幕物理像素/设备独立像素devicePixelRatio�
 <h5 id="ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸"><a href="#ppi-像素密度，也就是每英寸像素取值-计算公式：屏幕边的物理像素除以物理尺寸" class="headerlink" title="ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸"></a>ppi:像素密度，也就是每英寸像素取值.计算公式：屏幕边的物理像素除以物理尺寸</h5><p>默认比例依赖于显示密度。在密度低于200 dpi的显示设备上，比例为1.0。<br><br>在密度介于200及300 dpi之间的显示设备上，比例为1.5。<br><br>因此在retina的显示屏上，<br>对于具有300 dpi以上密度的显示设备，比例为密度/150dpi向下取整的结果。<br><br>(再有在视口比例为1时才会应用默认比例。否则，CSS像素与设备像素之间的关系依赖于当前的缩放等级。)<br></p>
 <h5 id="CSS-Reference-Pixel"><a href="#CSS-Reference-Pixel" class="headerlink" title="CSS Reference Pixel"></a>CSS Reference Pixel</h5><p>它为了保证CSS像素在不同设备和不同距离上观测到的大小保持一致保持连贯性。(感觉很难把握)</p>
 <h3 id="2-media媒体查询"><a href="#2-media媒体查询" class="headerlink" title="2.@media媒体查询"></a>2.@media媒体查询</h3><p>主要是用来适配各种机型，对于一些要求不高的的项目，可以用这种方式进行适配(只是配一些主要机型)，<br><br>但是缺点是适配的样式是范围型的，不够精确</p>
-<h3 id="3-viewport"><a href="#3-viewport" class="headerlink" title="3.viewport"></a>3.viewport</h3><p>html元素宽度是占据viewport的100%，而在桌面浏览器中，viewport与浏览器窗口大小刚好相等。<br><br>但在移动端中，默认是以980px渲染网页的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320, initial-scale=1.5&quot;&gt;</div></pre></td></tr></table></figure></p>
-<p>因此现在可以自己设定他渲染的像素，也可以获取该设备的宽度width=device-width<br><br><a href="http://www.infoq.com/cn/articles/development-of-the-mobile-web-deep-concept" target="_blank" rel="external">一篇比较详细的介绍移动端的文章</a></p>
-<h3 id="4-解决方案"><a href="#4-解决方案" class="headerlink" title="4.解决方案"></a>4.解决方案</h3><p>(1).当适配机型是Retina屏幕下时，用媒体查询的方式对图片的加载需要进行适配，可以准备两张图片<br><br>一张普通像素照片，一张高精度照片，这样就可以在Retina屏幕下加载高精密度像素的图片<br><br>(2).移动端页面适配最后参考了一下手淘的方式，开源能够直接用，而且能够适配所有机型，<br><br>引入手淘flexible.js后，不同写任何的meta标签，将设计稿宽度除以10，作为根元素字体大小，<br>之后量出其他元素宽度，转换为rem就可以了<br><br>最后用手淘的flexible.js方案写一个<a href="https://z2014.github.io/baidu-task/phone/index.html" target="_blank" rel="external">demo</a></p>
+<h3 id="3-viewport"><a href="#3-viewport" class="headerlink" title="3.viewport"></a>3.viewport</h3><p>html元素宽度是占据viewport的100%，而在桌面浏览器中，viewport与浏览器窗口大小刚好相等。<br><br>但在移动端中，默认是以980px渲染网页的</p>
+<h4 id="1-layout-viewport"><a href="#1-layout-viewport" class="headerlink" title="(1).layout viewport"></a>(1).layout viewport</h4><p>layout viewport的概念其实跟pc端的viewport是一样的，是作为html的”上层“元素。将宽继承给html。html内的各元素都是以layout viewport为基准进行布局的。但跟pc端不同的是，pc端的viewport的宽是由浏览器的窗口的宽决定的，用户可以手动拖动窗口改变宽的大小。但是移动端的不同平台的浏览器呈现不同的layout viewport</p>
+<h4 id="2-visual-viewport"><a href="#2-visual-viewport" class="headerlink" title="(2).visual viewport"></a>(2).visual viewport</h4><p>将visual viewport想象成覆盖手机屏幕的一个框，这个框带有类似pc端缩放的功能，而且这个框的度量单位也是css像素。这就意味着，在layout viewport不变的情况，我们能看到多少css像素的东西，取决于这个框的缩放程度。默认情况下。大多数移动端浏览器会将visual viewport这个框缩放到与layout viewport相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320, initial-scale=1.5&quot;&gt;</div></pre></td></tr></table></figure>
+<p>因此现在可以自己设定他渲染的像素，也可以获取该设备的宽度width=device-width<br></p>
+<ul>
+<li>document.innerWidth能取到浏览器窗口的宽(包含滚动条)</li>
+<li>document.documentElement.clientWidth(viewport的宽)</li>
+<li>默认「body」的宽度取自「HTML」，而「HTML」的宽度取自「viewport」，「viewport」的宽度正好等于「浏览器」窗口的宽度。<br><a href="http://www.infoq.com/cn/articles/development-of-the-mobile-web-deep-concept" target="_blank" rel="external">一篇比较详细的介绍移动端的文章</a></li>
+</ul>
+<h3 id="4-解决方案"><a href="#4-解决方案" class="headerlink" title="4.解决方案"></a>4.解决方案</h3><p>(1).当适配机型是Retina屏幕下时，用媒体查询的方式对图片的加载需要进行适配，可以准备两张图片<br><br>一张普通像素照片，一张高精度照片，这样就可以在Retina屏幕下加载高精密度像素的图片<br><br>(2).移动端页面适配最后参考了一下手淘的方式，开源能够直接用，而且能够适配所有机型，<br><br>引入手淘flexible.js后，不同写任何的meta标签，将设计稿宽度除以10，作为根元素字体大小，<br>之后量出其他元素宽度，转换为rem就可以了<br><br><a href="http://lvdada.org/2016/01/28/viewport-and-flexibleJs" target="_blank" rel="external">一篇flexible.js的原理分析</a><br><br>最后用手淘的flexible.js方案写一个<a href="https://z2014.github.io/baidu-task/phone/index.html" target="_blank" rel="external">demo</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="ciywasyju0003iw8nu876tswy" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="cj02iyb100005os8noa8lew7d" class="article-share-link">공유</a>
       
 
       
