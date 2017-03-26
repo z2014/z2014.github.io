@@ -8,10 +8,10 @@
   <meta name="description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用react搭起的逼乎的应用总结">
-<meta property="og:url" content="http://yoursite.com/2017/01/09/post4/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/01/09/react/index.html">
 <meta property="og:site_name" content="z2014的博客">
 <meta property="og:description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
-<meta property="og:updated_time" content="2017-02-09T16:13:36.655Z">
+<meta property="og:updated_time" content="2017-03-09T15:16:50.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用react搭起的逼乎的应用总结">
 <meta name="twitter:description" content="收获与反思整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username当参数传递进去。这次写组件的代码，一">
@@ -90,7 +90,7 @@
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Pesquisar">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -110,9 +110,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-post4" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-react" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/09/post4/" class="article-date">
+    <a href="/2017/01/09/react/" class="article-date">
   <time datetime="2017-01-09T02:12:31.991Z" itemprop="datePublished">2017-01-09</time>
 </a>
     
@@ -132,13 +132,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了<br><br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，因为如果想在jxx表达式中显示html实体，可能会遇到二次转义的问题，还可以用Unicode字符来解决，这是要确保文件是UTF-8编码且网页也是UTF-8编码。还可以在数组里混合使用字符串和jsx元素。在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。</p>
+        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了<br><br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，因为如果想在jxx表达式中显示html实体，可能会遇到二次转义的问题，还可以用Unicode字符来解决，这是要确保文件是UTF-8编码且网页也是UTF-8编码。还可以在数组里混合使用字符串和jsx元素。在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNode这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="cj02iyazy0001os8ngb4dxvs6" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/09/react/" data-id="cj0pzff1a0001ug8nm20r67xa" class="article-share-link">Compartilhar</a>
       
 
       
@@ -148,7 +148,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/01/21/post5/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/01/21/rules/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -158,7 +158,7 @@
     </a>
   
   
-    <a href="/2016/11/20/post3/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/11/20/flexible/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">移动端杂谈</div>
     </a>

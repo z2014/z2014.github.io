@@ -89,7 +89,7 @@
     </nav>
     <div id="search-form-wrap">
       <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="검색">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Pesquisar">
         <input type="submit" value="" class="search-form-submit">
         <input name=tn type=hidden value="bds">
         <input name=cl type=hidden value="3">
@@ -110,6 +110,54 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-socket" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/24/socket/" class="article-date">
+  <time datetime="2017-03-24T15:04:24.580Z" itemprop="datePublished">2017-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-web-socket"><a href="#title-web-socket" class="headerlink" title="title:web socket"></a>title:web socket</h2><h3 id="http的生命周期"><a href="#http的生命周期" class="headerlink" title="http的生命周期"></a>http的生命周期</h3><p>Websocket是一个持久化的协议，相对于HTTP这种非持久化的数据来说<br>http的生命周期通过request来界定，也就是一个request一个response，那么在http1.0中，这次http请求就结束了</p>
+<p>首先在一个web socket请求头里面<br><img src="images/2.png"><br><img src="images/3.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div></pre></td></tr></table></figure></p>
+<p>这就是再告诉服务器我发起的是一个web socket服务，而不是http协议</p>
+<p>服务器端会返回这样一个文件</p>
+<p><img src="images/1.png"></p>
+<ul>
+<li>Sec-WebSocket-Accept 这个则是经过服务器确认，并且加密过后的 Sec-WebSocket-Key</li>
+<li>Sec-WebSocket-Protocol 则是表示最终使用的协议。</li>
+</ul>
+<p>如果不支持Websocket，那么可以采用以下两种方式</p>
+<h3 id="ajax轮询"><a href="#ajax轮询" class="headerlink" title="ajax轮询"></a>ajax轮询</h3><p>就是每隔几秒钟浏览器都会向服务器发起一次请求，询问是否有新信息</p>
+<h3 id="long-poll"><a href="#long-poll" class="headerlink" title="long poll"></a>long poll</h3><p>和ajax不同的是，浏览器发起一次请求后，服务器如果没有消息，就一直不反回，直到有消息才返回，返回完以后，在此建立连接</p>
+<h3 id="这次项目的时候用了nodejs中的socket-io包，在使用的时候有一个小bug"><a href="#这次项目的时候用了nodejs中的socket-io包，在使用的时候有一个小bug" class="headerlink" title="这次项目的时候用了nodejs中的socket.io包，在使用的时候有一个小bug."></a>这次项目的时候用了nodejs中的socket.io包，在使用的时候有一个小bug.</h3><p>一开始，当我点击send按钮，会执行以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">send() &#123;</div><div class="line">    const text = this.refs.content.innerHTML;</div><div class="line">    const self = this;</div><div class="line">    var &#123; list &#125; = this.state;</div><div class="line">    socket.emit(&apos;speak&apos;,&#123;user:globalUser.user,text:text&#125;);</div><div class="line">    socket.on(&apos;receive&apos;,function(data) &#123;</div><div class="line">        list.push(data);</div><div class="line">        self.setState(&#123; list:list &#125;);</div><div class="line">    &#125;);</div><div class="line">    this.refs.content.innerHTML = &apos;&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后神奇的事情就发生了，第一次点击发送的时候，对话框将聊天信息显示一次，第二次点击的时候，对话框将第二次发送的信息显示两次，第三次点击send，对话框将信息显示3次。</p>
+<p>这和socket背后的原理有关。原来我们的程序是有两次代理的，HTTP协议先通过Nginx等服务器解析后，再传送给相应的Handler处理，websocket只需要一次HTTP握手，所以整个通讯建立在一次连接中，直到关闭请求。</p>
+<p>因此，当我每次点击send发送时，他都会发起一次连接，这样就会出现消息随点击次数逐次递增的情况</p>
+<h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">componentDidMount() &#123;</div><div class="line">	var &#123; list &#125; = this.state;</div><div class="line">	const self = this;</div><div class="line">	socket.on(&apos;receive&apos;,function(data) &#123;</div><div class="line">        list.push(data);</div><div class="line">        self.setState(&#123; list:list &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将socket.on放在componentDidMount()中执行就可以了，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/03/24/socket/" data-id="cj0pzff1k0002ug8npnzg3rlw" class="article-share-link">Compartilhar</a>
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -167,7 +215,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/31/webpack/" data-id="cj02iyb0p0004os8nsoi1be6u" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/31/webpack/" data-id="cj0pzff2r0006ug8nmwssb49n" class="article-share-link">Compartilhar</a>
       
 
       
@@ -178,9 +226,9 @@
 
 
   
-    <article id="post-post5" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-rules" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/21/post5/" class="article-date">
+    <a href="/2017/01/21/rules/" class="article-date">
   <time datetime="2017-01-20T16:17:22.354Z" itemprop="datePublished">2017-01-21</time>
 </a>
     
@@ -192,7 +240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/post5/">前端优化法则</a>
+      <a class="article-title" href="/2017/01/21/rules/">前端优化法则</a>
     </h1>
   
 
@@ -228,7 +276,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/21/post5/" data-id="cj02iyb0j0003os8nxiq0uzca" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/21/rules/" data-id="cj0pzff1w0003ug8ndcaoquhi" class="article-share-link">Compartilhar</a>
       
 
       
@@ -239,9 +287,9 @@
 
 
   
-    <article id="post-post4" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-react" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/09/post4/" class="article-date">
+    <a href="/2017/01/09/react/" class="article-date">
   <time datetime="2017-01-09T02:12:31.991Z" itemprop="datePublished">2017-01-09</time>
 </a>
     
@@ -253,7 +301,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/09/post4/">用react搭起的逼乎的应用总结</a>
+      <a class="article-title" href="/2017/01/09/react/">用react搭起的逼乎的应用总结</a>
     </h1>
   
 
@@ -261,13 +309,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了<br><br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，因为如果想在jxx表达式中显示html实体，可能会遇到二次转义的问题，还可以用Unicode字符来解决，这是要确保文件是UTF-8编码且网页也是UTF-8编码。还可以在数组里混合使用字符串和jsx元素。在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNodez这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。</p>
+        <h3 id="收获与反思"><a href="#收获与反思" class="headerlink" title="收获与反思"></a>收获与反思</h3><p>整个项目是一个单页面，用的是antd的组件库，整个应用没有用到redux来管理数据流，<br>因为页面中的数据传递比较简单，也主要是想体验一下不用redux整个应用的数据如何传递，<br>组件与组件间的通信确实比较麻烦，要从最上面的父组件开始，将state作为props传递进去，<br>比如改变登陆状态的函数，我从根组件向下一直传递到按钮点击登陆事件的发生，将username<br>当参数传递进去。<br><br>这次写组件的代码，一直在es5和es6的语法中切换，遇到的最大的问题就是this的指向问题，<br>用的还是ajax向后端请求数据，只为了用ajax就引入了整个jquery库，是有点浪费，下次项目试试fetch了<br><br>项目里面解决了解决了很久的一个问题应该是后端给我返回的数据一段html片段，我要在页面上显示出来，<br>如果直接用item.comment显示的是字符串，最后找了半天用dangerouslySetInnerHTML解决了，因为如果想在jxx表达式中显示html实体，可能会遇到二次转义的问题，还可以用Unicode字符来解决，这是要确保文件是UTF-8编码且网页也是UTF-8编码。还可以在数组里混合使用字符串和jsx元素。在刚写这个项目中自己的思维也还是没有转过来，一开始竟然有ev.target.parentNode这种dom代码出现，好在后来及时醒悟，这个小项目也算是进入react的第一步了。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/01/09/post4/" data-id="cj02iyazy0001os8ngb4dxvs6" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2017/01/09/react/" data-id="cj0pzff1a0001ug8nm20r67xa" class="article-share-link">Compartilhar</a>
       
 
       
@@ -278,9 +326,9 @@
 
 
   
-    <article id="post-post3" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-flexible" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/20/post3/" class="article-date">
+    <a href="/2016/11/20/flexible/" class="article-date">
   <time datetime="2016-11-20T01:31:14.203Z" itemprop="datePublished">2016-11-20</time>
 </a>
     
@@ -292,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/20/post3/">移动端杂谈</a>
+      <a class="article-title" href="/2016/11/20/flexible/">移动端杂谈</a>
     </h1>
   
 
@@ -322,7 +370,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/20/post3/" data-id="cj02iyb100005os8noa8lew7d" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/20/flexible/" data-id="cj0pzff230004ug8nl2616g05" class="article-share-link">Compartilhar</a>
       
 
       
@@ -333,9 +381,9 @@
 
 
   
-    <article id="post-post2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-promise" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/18/post2/" class="article-date">
+    <a href="/2016/11/18/promise/" class="article-date">
   <time datetime="2016-11-18T14:26:49.830Z" itemprop="datePublished">2016-11-18</time>
 </a>
     
@@ -347,7 +395,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/18/post2/">回调函数与Promise(中心第一次分享)</a>
+      <a class="article-title" href="/2016/11/18/promise/">回调函数与Promise(中心第一次分享)</a>
     </h1>
   
 
@@ -377,7 +425,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post2/" data-id="cj02iyb0b0002os8njw4r17c1" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/18/promise/" data-id="cj0pzff2i0005ug8n23bxmtmk" class="article-share-link">Compartilhar</a>
       
 
       
@@ -388,9 +436,9 @@
 
 
   
-    <article id="post-post1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-canvas" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/11/18/post1/" class="article-date">
+    <a href="/2016/11/18/canvas/" class="article-date">
   <time datetime="2016-11-18T14:26:49.810Z" itemprop="datePublished">2016-11-18</time>
 </a>
     
@@ -402,7 +450,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/18/post1/">刮刮乐效果遇到的一些问题</a>
+      <a class="article-title" href="/2016/11/18/canvas/">刮刮乐效果遇到的一些问题</a>
     </h1>
   
 
@@ -418,7 +466,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/11/18/post1/" data-id="cj02iyayx0000os8nhs8k31ib" class="article-share-link">공유</a>
+        <a data-url="http://yoursite.com/2016/11/18/canvas/" data-id="cj0pzfeyj0000ug8nuqttntcz" class="article-share-link">Compartilhar</a>
       
 
       
