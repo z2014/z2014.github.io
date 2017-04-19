@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>md5 | z2014的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前在学计算机网络的时候，听说过这个md5，当时对他的印象就是用来加密用的，之前尝试主要是在后端在保存用户密码的时候，会用到md5.因此对于md5的认识一直是一个加密工具，直到最近实习时有一个业务需求是将用户上传的交叉编译器在前端用md5计算出来后发到后台进行比较，当时比较蒙逼，md5还能这么用，下面内容用来记录一下这次学习到的一些知识。
+维基百科上是这么介绍的：MD5消息摘要算法，一种被广泛使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="md5">
+<meta property="og:url" content="http://yoursite.com/2017/04/19/md5/index.html">
+<meta property="og:site_name" content="z2014的博客">
+<meta property="og:description" content="之前在学计算机网络的时候，听说过这个md5，当时对他的印象就是用来加密用的，之前尝试主要是在后端在保存用户密码的时候，会用到md5.因此对于md5的认识一直是一个加密工具，直到最近实习时有一个业务需求是将用户上传的交叉编译器在前端用md5计算出来后发到后台进行比较，当时比较蒙逼，md5还能这么用，下面内容用来记录一下这次学习到的一些知识。
+维基百科上是这么介绍的：MD5消息摘要算法，一种被广泛使用">
+<meta property="og:updated_time" content="2017-04-19T09:15:06.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="md5">
+<meta name="twitter:description" content="之前在学计算机网络的时候，听说过这个md5，当时对他的印象就是用来加密用的，之前尝试主要是在后端在保存用户密码的时候，会用到md5.因此对于md5的认识一直是一个加密工具，直到最近实习时有一个业务需求是将用户上传的交叉编译器在前端用md5计算出来后发到后台进行比较，当时比较蒙逼，md5还能这么用，下面内容用来记录一下这次学习到的一些知识。
+维基百科上是这么介绍的：MD5消息摘要算法，一种被广泛使用">
+  
+  
+    <link rel="icon" href="logo.png">
+  
+  <link type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/scrollUp/image.css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div class="logo">
+        <img src="/logo.png" alt="Profile Picture">
+      </div>
+      <div id="title">z2014的博客</div>
+      
+       <ul class="my-socials">
+  
+  <li>
+  	<a href="https://github.com/z2014" class="github" target="_blank">
+  		<i class="fa fa-github"></i>
+  	</a>
+  </li>
+  
+  <li>
+  	<a href="http://weibo.com/u/3091243434" class="weibo" target="_blank">
+  		<i class="fa fa-weibo"></i>
+  	</a>
+  </li>
+  
+ 
+</ul>
+    </div>
+  </div>
+  <div id="header-inner" class="">
+    <nav id="main-nav">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <!--
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      -->
+    </nav>
+    <nav id="title-nav" style="display:none">
+      <a href="/">z2014的博客</a>
+      <img src="/logo.png" alt="Profile Picture">
+      <!--
+      <span id="title-nav-socials">
+        
+          <a href="https://github.com/z2014" class="github" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+        
+          <a href="http://weibo.com/u/3091243434" class="weibo" target="_blank">
+            <i class="fa fa-weibo"></i>
+          </a>
+        
+       
+     </span>
+      -->
+    </nav>
+    <nav id="sub-nav">
+      
+      <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+    </nav>
+    <div id="search-form-wrap">
+      <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+        <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+        <input type="submit" value="" class="search-form-submit">
+        <input name=tn type=hidden value="bds">
+        <input name=cl type=hidden value="3">
+        <input name=ct type=hidden value="2097152">
+        <input type="hidden" name="si" value="yoursite.com">
+      </form>
+    </div>
+  </div>
+  <div class="site-nav" style="display: none;">
+    <ul>
+    
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+    </ul>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-md5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/md5/" class="article-date">
+  <time datetime="2017-04-19T06:50:14.412Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      md5
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在学计算机网络的时候，听说过这个md5，当时对他的印象就是用来加密用的，之前尝试主要是在后端在保存用户密码的时候，会用到md5.因此对于md5的认识一直是一个加密工具，直到最近实习时有一个业务需求是将用户上传的交叉编译器在前端用md5计算出来后发到后台进行比较，当时比较蒙逼，md5还能这么用，下面内容用来记录一下这次学习到的一些知识。</p>
+<p>维基百科上是这么介绍的：MD5消息摘要算法，一种被广泛使用的密码散列函数，可以产生出一个128位（16字节）的散列值（hash value），用于确保信息传输完整一致。</p>
+<p>#####说到md5，主要了解一下hash算法：他其实就是把任意长度的输入，通过散列算法，变换成固定长度的输出。</p>
+<p><b>基本原理就是：</b>若结构中存在和关键字k相等的记录，则必定在f（k）的位置上，这样的对应关系f为散列函数，常用的构造散列函数的方法有直接寻址法（H（key）=key；或者H（key）=a*key+b）。但是对于不同的关键字，却可能得到相同的散列地址，此时就需要解决冲突，其中有一个再散列法（Hi=RHi（key），i=1，2，，k。RHi是不同的散列函数，当同义词产生地址冲突时，就计算另外一个散列函数地址，直到冲突不发生。</p>
+<p>因此，影响产生冲突的有以下三个因素：</p>
+<ul>
+<li><b>1.散列函数是否均匀；</b></li>
+<li><b>2.处理冲突的方法；</b></li>
+<li><b>3.散列表的装填因子a。</b>（a是散列表装满程度的标志因子。由于表长是定值，a与“填入表中的元素个数”成正比，所以，a越大，填入表中的元素较多，产生冲突的可能性就越大；a越小，填入表中的元素较少，产生冲突的可能性就越小。）</li>
+</ul>
+<p>查找的时候，一些关键码可通过散列函数转换的地址直接找到，另一些产生了冲突的关键码，需要按处理冲突的方法进行查找。关键码的比较次数，取决于产生冲突的多少，产生的冲突少，查找效率就高，产生的冲突多，查找效率就低。</p>
+<p>当然，说了这么多，最后我还是找了github上star比较多的来使用。<a href="https://github.com/satazor/js-spark-md5" target="_blank" rel="external">js-spark-md5</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"file"</span>).addEventListener(<span class="string">"change"</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> fileReader = <span class="keyword">new</span> FileReader(),</div><div class="line">	    box = <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>),</div><div class="line">	    blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice,</div><div class="line">	    <span class="comment">//获取用户选择的文件</span></div><div class="line">	    file = <span class="built_in">document</span>.getElementById(<span class="string">"file"</span>).files[<span class="number">0</span>],</div><div class="line">	    <span class="comment">//将文件进行分割,以2M为一个片段</span></div><div class="line">	    chunkSize = <span class="number">2097152</span>,</div><div class="line">	    chunks = <span class="built_in">Math</span>.ceil(file.size / chunkSize),</div><div class="line">	    currentChunk = <span class="number">0</span>,</div><div class="line">	    spark = <span class="keyword">new</span> SparkMD5();</div><div class="line">	fileReader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">	    <span class="comment">//e.target.result是我们需要的片段信息</span></div><div class="line">		spark.appendBinary(e.target.result);</div><div class="line">		currentChunk ++ ;</div><div class="line">		<span class="keyword">if</span> (currentChunk &lt; chunks) &#123;</div><div class="line">			loadNext();</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">'finish'</span>);</div><div class="line">			box.innerHTML = <span class="string">'MD5:'</span> + spark.end();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">loadNext</span> (<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">var</span> start = currentChunk*chunkSize,</div><div class="line">		    end = ((start + chunkSize) &gt;= file.size) ? file.size : start + chunkSize;</div><div class="line">		<span class="comment">//把文件一片一片传给fileReader对象</span></div><div class="line">		fileReader.readAsBinaryString(blobSlice.call(file,start,end));</div><div class="line">	&#125;</div><div class="line">	loadNext();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>最后当你准备用一个md5.js的时候，一定要和服务器上的md5算法生成的值进行比较，不同的md5算法求得的值可能不一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">md5sum file</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2017/04/19/md5/" data-id="cj1orm43w0000xc8nzjcbkb5i" class="article-share-link">Share</a>
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/24/socket/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">web socket</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 z2014<br>
+      Theme <a href="https://github.com/henryhuang/oishi" target="_blank">Oishi</a>, Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <!--
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    -->
+    
+
+<!-- 百度分享 start -->
+
+<!-- 百度分享 end -->
+
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+<script src="/js/jquery.scrollUp.min.js"></script>
+<script src="/js/jquery.transform.js"></script>
+<script src="/js/menu.js"></script>
+
+<script src="/js/script.js"></script>
+<script src="/js/scrollUp.js"></script>
+
+  </div>
+</body>
+</html>
