@@ -5,22 +5,22 @@
   
   <title>如何实现一个promise | z2014的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
+  <meta name="description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
 最近春招一段时间，总会有各种各样关于promise的笔试题，原来以为自己对promise已经很了解了，想不到还是渣渣一个，我把关于promise相关的理解集中起来，来看一下下面这道题的输出是什么呢？
-12345678910">
+12345678910111213141516171819setTimeout(()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何实现一个promise">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/promise2/index.html">
 <meta property="og:site_name" content="z2014的博客">
-<meta property="og:description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
+<meta property="og:description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
 最近春招一段时间，总会有各种各样关于promise的笔试题，原来以为自己对promise已经很了解了，想不到还是渣渣一个，我把关于promise相关的理解集中起来，来看一下下面这道题的输出是什么呢？
-12345678910">
-<meta property="og:updated_time" content="2017-05-01T04:34:18.160Z">
+12345678910111213141516171819setTimeout(()">
+<meta property="og:updated_time" content="2017-05-13T05:27:58.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何实现一个promise">
-<meta name="twitter:description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
+<meta name="twitter:description" content="这是一篇翻译过来的博客，加杂了一些自己的理解进去。这里是原文链接，如果对于我这篇博客有迷惑的地方，可以去原文查看
 最近春招一段时间，总会有各种各样关于promise的笔试题，原来以为自己对promise已经很了解了，想不到还是渣渣一个，我把关于promise相关的理解集中起来，来看一下下面这道题的输出是什么呢？
-12345678910">
+12345678910111213141516171819setTimeout(()">
   
   
     <link rel="icon" href="logo.png">
@@ -138,7 +138,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。"><a href="#这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。" class="headerlink" title="这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。"></a>这是一篇翻译过来的博客，加杂了一些自己的理解进去，由于我的能力有限，可能有些地方对原文理解的并不深刻，还希望指出。</h4><p><a href="https://github.com/kriskowal/q/tree/v1/design" target="_blank" rel="external">这里是原文链接</a>，如果对于我这篇博客有迷惑的地方，可以去原文查看</p>
+        <h4 id="这是一篇翻译过来的博客，加杂了一些自己的理解进去。"><a href="#这是一篇翻译过来的博客，加杂了一些自己的理解进去。" class="headerlink" title="这是一篇翻译过来的博客，加杂了一些自己的理解进去。"></a>这是一篇翻译过来的博客，加杂了一些自己的理解进去。</h4><p><a href="https://github.com/kriskowal/q/tree/v1/design" target="_blank" rel="external">这里是原文链接</a>，如果对于我这篇博客有迷惑的地方，可以去原文查看</p>
 <p>最近春招一段时间，总会有各种各样关于promise的笔试题，原来以为自己对promise已经很了解了，想不到还是渣渣一个，我把关于promise相关的理解集中起来，来看一下下面这道题的输出是什么呢？</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'async'</span>),<span class="number">0</span>);</div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">	resolve(<span class="function">(<span class="params">(</span>) =&gt;</span> &#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'inner'</span>)</div><div class="line">		<span class="keyword">return</span> <span class="string">'aa'</span></div><div class="line">	&#125;)());</div><div class="line">	resolve(<span class="string">'djdj'</span>);</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>)</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(<span class="number">3</span>);</div><div class="line">promise.then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'data'</span>,data);</div><div class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(res);</div><div class="line">&#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'err'</span>,err)</div><div class="line">&#125;)</div><div class="line"><span class="built_in">console</span>.log(<span class="number">4</span>);</div></pre></td></tr></table></figure>
 <h4 id="正确输出顺序是1，inner，2，3，4，data-aa，undefined，async"><a href="#正确输出顺序是1，inner，2，3，4，data-aa，undefined，async" class="headerlink" title="正确输出顺序是1，inner，2，3，4，data aa，undefined，async"></a>正确输出顺序是1，inner，2，3，4，data aa，undefined，async</h4><p><b>解答:</b>一个promise一旦被决议，那么其状态不可改变，一个promise调用then的时候，即使这个promise已经决议，但是提供给then的回调也总会被异步调用。但是为什么是先执行then回调后执行setTimeout呢？可以理解为他们都是回调函数被挂载在了时间循环队列中，但是then的回调是不同于setTimeout的另一种类型，它一种插队行为，总会排在异步回调函数中的第一个</p>
@@ -163,7 +163,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2017/04/30/promise2/" data-id="cj25ms5kf0004go8nn7i9smmu" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2017/04/30/promise2/" data-id="cj2mu25sz0000qw8n8yw6cy2a" class="article-share-link">Share</a>
       
 
       
